@@ -1,0 +1,35 @@
+body{
+	background-color: #aaa;
+}
+.add-list-group .list-group{
+
+}
+.i-remove{
+	float: right;
+}
+
+.container{
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 60%;
+}
+
+.i-addon{
+	margin-bottom: 20px;
+}
+.i-checkbox{
+	height: 25px;
+	width: 50%;
+	margin-bottom: 20px;
+	position: relative;
+}
+.i-checkbox .i-checkbox-name{
+	font-size: 16px;
+}
+#i-check-backup{
+	float: right;
+}
+#i-logo{
+	text-align: center;
+}

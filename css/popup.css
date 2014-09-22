@@ -1,0 +1,20 @@
+html{
+	height: 70px;
+	width: 130px;
+}
+body{
+	background-color: #F0F8FF;
+	height: 70px;
+	width: 130px;
+}
+.container{
+	
+}
+
+.i-remove{
+	float: right;
+}
+
+.i-msg{
+	margin-top: 8px;
+}

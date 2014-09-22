@@ -1,0 +1,115 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-switch.min.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="css/settings.css">
+</head>
+<body>
+  <div class="container">
+    <div id="i-logo">
+      <img src="images/logo.png">
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">基本设置</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row i-checkbox">
+          <div class="col-md-9 i-checkbox-name">显示消息</div>
+          <div class="col-md-3">
+            <input type="checkbox" name="my-checkbox" id="i-show-msg">
+          </div>
+        </div>
+        <div class="row i-checkbox">
+          <div class="col-md-9 i-checkbox-name">开启桌面提醒</div>
+          <div class="col-md-3">
+            <input type="checkbox" name="my-checkbox" id="i-desktop-msg">
+          </div>
+        </div>
+        <div class="input-group i-addon">
+          <span class="input-group-addon">回帖小尾巴</span>
+          <input type="text" class="form-control" id="i-reply-sig" placeholder="添加回帖时的个性签名">
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">过滤设置</h3>
+      </div>
+      <div class="panel-body">
+        <div class="add-list-group">
+          <div class="input-group">
+            <span class="input-group-addon">过滤帖子</span>
+            <input type="text" class="form-control" placeholder="过滤此用户的帖子">
+            <span class="input-group-btn">
+              <button class="btn btn-default i-add" type="button">添加</button>
+            </span>
+          </div>
+          <ul class="list-group" id="i-list-filter-post">
+          <!--
+            <li class="list-group-item" id="i-list-filter-post">
+              <span class="username">username</span>
+              <span class="glyphicon glyphicon-trash i-remove" title="删除"></span>
+            </li>
+          -->
+          </ul>
+        </div>
+        <div class="add-list-group">
+          <div class="input-group">
+            <span class="input-group-addon">过滤签名</span>
+            <input type="text" class="form-control" placeholder="过滤此用户的签名">
+            <span class="input-group-btn">
+              <button class="btn btn-default i-add" type="button">添加</button>
+            </span>
+          </div>
+          <ul class="list-group" id="i-list-filter-sig">
+          </ul>
+        </div>
+        <div class="add-list-group">
+          <div class="input-group">
+            <span class="input-group-addon">关注</span>
+            <input type="text" class="form-control" placeholder="关注此用户的帖子，新帖消息提醒">
+            <span class="input-group-btn">
+              <button class="btn btn-default i-add" type="button">添加</button>
+            </span>
+          </div>
+          <ul class="list-group" id="i-list-focus-user">
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">高级设置</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row i-checkbox" style="width: 75%;">
+          <div class="col-md-6 i-checkbox-name">帖子备份支持</div>
+          <div class="col-md-2">
+            <input type="checkbox" name="my-checkbox" id="i-backup-post">
+          </div>
+          <div class="col-md-4"><a href="backup.html" target="_blank">
+            <button type="button" class="btn btn-success" id="i-check-backup">
+              查看备份的帖子
+            </button></a>
+          </div>
+        </div>
+        <div class="row i-checkbox">
+          <div class="col-md-9 i-checkbox-name">Markdown支持</div>
+          <div class="col-md-3">
+            <input type="checkbox" name="my-checkbox" id="i-enable-markdown">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/jquery-2.1.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap-switch.min.js"></script>
+  <script src="js/options.js"></script>
+</body>
+</html>

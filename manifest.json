@@ -1,0 +1,49 @@
+{
+	"manifest_version": 2,
+	"name": "Anti Riverside",
+	"description": "Extension for bbs.stuhome.net",
+	"version": "1.0",
+	"icons": {
+		"128": "images/icon128.png",
+		"64": "images/icon64.png",
+		"48": "images/icon48.png",
+		"32": "images/icon32.png",
+		"19": "images/icon19.png",
+		"16": "images/icon16.png"
+	},
+	"content_scripts": [
+	{
+		"all_frames": true,
+		"css": [ "css/fixui.css" ],
+      	"matches": [ "http://bbs.stuhome.net/*" ]
+	},
+	{
+		"run_at": "document_end",
+		"js": [
+			"js/content/options_messaging.js",
+			"js/content/filter.js",
+			"js/content/add_signature.js"
+		],
+		"matches": [ "http://bbs.stuhome.net/*" ]
+	}
+	],
+	"options_page": "options.html",
+	"permissions": [
+	    "notifications",
+      	"tabs",
+		"storage",
+		"http://bbs.stuhome.net/*"
+	],
+	"browser_action": {
+		"default_icon": "images/icon128.png",
+		"default_popup": "popup.html"
+	},
+	"background": {
+		"scripts": [
+			"js/background/options.js",
+			"js/background/xhr.js",
+			"js/background/message.js"
+		],
+		"persistent": true
+	}
+}
