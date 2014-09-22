@@ -42,7 +42,8 @@
 		"scripts": [
 			"js/background/options.js",
 			"js/background/xhr.js",
-			"js/background/message.js"
+			"js/background/message.js",
+			"js/background/show_ip.js"
 		],
 		"persistent": true
 	}
