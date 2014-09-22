@@ -35,7 +35,7 @@
 		"http://bbs.stuhome.net/*"
 	],
 	"browser_action": {
-		"default_icon": "images/icon128.png",
+		"default_icon": "images/icon19.png",
 		"default_popup": "popup.html"
 	},
 	"background": {
