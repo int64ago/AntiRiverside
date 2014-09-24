@@ -183,3 +183,7 @@ PRE { font-family:monospace, Microsoft Yahei; }
 	display: none;
 }
 
+.sigfastre {
+	background: url(../../template/qshpan/image/fastreply.gif) no-repeat 0 50%;
+	font-style: normal;
+}
