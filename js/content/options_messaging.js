@@ -8,14 +8,18 @@ function getOptions(names, responseCallback){
 	(chrome.extension.sendMessage || chrome.extension.sendRequest)(
 		{name: "getOptions", optionNames: names}, responseCallback);
 }
+var curUser = "";
 getOptions([
 	"Basic.Signature", "Filter.PostsByUsers",
 	"Filter.SignaturesOfUsers", "Filter.UsersFocused",
-	"Advance.Backup", "Advance.Markdown"
+	"Advance.Backup", "Advance.Markdown", "CurUser"
 	], function(options){
+		curUser = options.CurUser;
 		//console.log(options);
-		if(options.Signature != "")
+		if(options.CurUser != "" && options.Signature != "")
 			addSigature(options.Signature);
+		if(options.CurUser != "" && options.Backup)
+			backupPost();
 		//other options
 	}
 );

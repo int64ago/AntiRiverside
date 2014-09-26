@@ -7,4 +7,5 @@ function updatePopupTitle(){
 	});
 }
 
+//FIXME can't show ip if not online at first time
 window.setTimeout(updatePopupTitle(), 5 * 1000);

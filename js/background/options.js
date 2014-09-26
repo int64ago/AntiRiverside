@@ -105,7 +105,7 @@ var storage =
 var Options =
 {
 	Domain: "bbs.stuhome.net",
-
+	CurUser: "",
 	init: function(){
 		for(var sec in this.Properties){
 			for(var opt in this.Properties[sec]){
@@ -219,6 +219,8 @@ function onOptionsMessage(message, sender, sendResponse)
 			response.Backup = Options.Properties.Advance.Backup.value;
 		if(message.optionNames.indexOf("Advance.Markdown") != -1)
 			response.Markdown = Options.Properties.Advance.Markdown.value;
+		if(message.optionNames.indexOf("CurUser") != -1)
+			response.CurUser = Options.CurUser;
 	}
 	console.log(response);
 	sendResponse(response);
@@ -228,4 +230,7 @@ function onOptionsMessage(message, sender, sendResponse)
 function(message, sender, sendResponse){
 	if(message.name && message.name == "getOptions")
 		onOptionsMessage(message, sender, sendResponse);
+	else if(message.name && message.name == "backupInfo"){
+		ShowBackupNotification(message.optionNames);
+	}
 });

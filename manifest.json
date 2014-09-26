@@ -23,7 +23,8 @@
 			"js/jquery-2.1.1.min.js",
 			"js/content/options_messaging.js",
 			"js/content/filter.js",
-			"js/content/add_signature.js"
+			"js/content/add_signature.js",
+			"js/content/backup.js"
 		],
 		"matches": [ "http://bbs.stuhome.net/*" ]
 	}
@@ -33,7 +34,9 @@
 	    "notifications",
       	"tabs",
 		"storage",
-		"http://bbs.stuhome.net/*"
+		"http://bbs.stuhome.net/*",
+		"http://riverside.sinaapp.com/*",
+		"http://riverside.qiniudn.com/*"
 	],
 	"browser_action": {
 		"default_icon": "images/icon19.png",

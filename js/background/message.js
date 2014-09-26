@@ -16,12 +16,13 @@ function UpdateBrowserAction(state, badge)
 function UpdateMessageCount()
 {
 	XHR.SendRequest("/home.php?mod=space&do=pm", function(xhr){
-		var user = xhr.responseText.match(/访问我的空间/);
+		var user = xhr.responseText.match(/avatar\.php\?uid=(\d+)/);
 		var notice = xhr.responseText.match(/提醒\((\d+)\)/);
 		var pm = xhr.responseText.match(/<strong class="xi1">\((\d+)\)<\/strong>/);
 		console.log("user:" + user);
 		console.log("notice:" + notice);
 		console.log("pm:" + pm);
+		Options.CurUser = user? user[1]:"";
 		iMsgBoxNum = pm? pm[1]:"0";
 		iNoticeBoxNum = notice? notice[1]:"0";
 		if(notice || pm)
@@ -55,13 +56,30 @@ function ShowMessageNotification(extra){
 	});
 }
 
+function ShowBackupNotification(result){
+	var options = {
+		type : "basic",
+		title : "备份消息",
+		message: result,
+		iconUrl : "images/icon48.png"
+	};
+	chrome.notifications.clear("backup", function(wasCleared){
+		//console.log("is cleared? "+ wasCleared);
+	});
+	chrome.notifications.create("backup", options, function(){
+		//console.log("notifications");
+	});
+}
+
 chrome.notifications.onClicked.addListener(function(id){
 	chrome.notifications.clear(id, function(wasCleared){
 		//console.log("is cleared? "+ wasCleared);
 	});
-	chrome.tabs.create({
-		url: 'http://bbs.stuhome.net/home.php?mod=space&do=pm'
-	});
+	if(id == "water"){
+		chrome.tabs.create({
+			url: 'http://bbs.stuhome.net/home.php?mod=space&do=pm'
+		});
+	}
 });
 
 //TODO timeInterval can be set by user
