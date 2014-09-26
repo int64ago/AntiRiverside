@@ -31,7 +31,6 @@ function backupPost(aesPasswd){
 			BackupInfo.postUrl = curUrl;//.clone().find("quote").remove().end()
 			BackupInfo.postText = plc.find(".pct .t_f").clone().find(".quote").remove().end().text();
 			BackupInfo.postCode = ""; // empty if timeout
-
 			var editp = plc.find(".editp");
 			if(editp.length != 0){
 				$.get(editp.attr("href"),function(data, status){
@@ -40,10 +39,10 @@ function backupPost(aesPasswd){
 					//escape stringify eating []
 					BackupInfo.postCode = BackupInfo.postCode.replace(/\[/g, "<-<");
 					BackupInfo.postCode = BackupInfo.postCode.replace(/]/g, ">->");
-					doBackup(BackupInfo);
+
 				});
 			}
-
+			doBackup(BackupInfo);
 			function doBackup(info){
 				var url = "http://riverside.sinaapp.com/up?uid=" + curUser;
 				var xhr = new XMLHttpRequest();
