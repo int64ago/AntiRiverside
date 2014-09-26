@@ -8,6 +8,18 @@ var bg = chrome.extension.getBackgroundPage();
 	$.get(url, function(data, status){
 		var links = JSON.parse(data);
 		console.log(links);
+
+		//get left space
+		var getLimitUrl = "http://riverside.sinaapp.com/limit?uid=" + bg.Options.CurUser;
+		$.get(getLimitUrl, function(data, status){
+			if(data == "0"){
+				$("#i-space").text("unlimited");
+			}else{
+				var leftSpace = parseInt(data) - links.length;
+				if(leftSpace < 0) leftSpace = 0;
+				$("#i-space").text(leftSpace);
+			}
+		});
 		// http://riverside.qiniudn.com/<username>#link
 		for(var link in links){
 			(function(_link){

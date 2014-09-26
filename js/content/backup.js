@@ -49,13 +49,14 @@ function backupPost(){
 				xhr.open("POST", url, true);
 				xhr.onreadystatechange = (function(){
 					if(this.readyState == XMLHttpRequest.DONE){
-						if(this.status == 200 && this.responseText){
+						if(this.status == 200 && this.responseText != "checkfailed"){
 							console.log(this.responseText);
 							chrome.extension.sendMessage(
 							{name: "backupInfo", optionNames: "备份成功:)"});
 						}else{
-							chrome.extension.sendRequest(
-							{name: "backupInfo", optionNames: "备份失败！"});
+							console.log(this.responseText);
+							chrome.extension.sendMessage(
+							{name: "backupInfo", optionNames: "备份【失败】！！！"});
 						}
 					}
 				});
