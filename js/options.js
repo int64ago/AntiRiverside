@@ -7,14 +7,14 @@ $(function(){
 
 	var Update = {
 		//"id of element":"key of storage"
-		SwitchPairs: {	
+		SwitchPairs: {
 			"#i-show-msg": "Basic.ShowMsg",
 			"#i-desktop-msg": "Basic.ShowDeskMsg",
-			"#i-backup-post": "Advance.Backup",
 			"#i-enable-markdown": "Advance.Markdown"
 		},
 		StringPairs: {
-			"#i-reply-sig": "Basic.Signature"
+			"#i-reply-sig": "Basic.Signature",
+			"#i-backup-post": "Advance.Backup"
 		},
 		ListPairs: {
 			"#i-list-filter-post": "Filter.PostsByUsers",
@@ -128,5 +128,4 @@ $(function(){
 		OnChange.allStrings();
 		OnChange.allLists();
 	})();
-	
 });

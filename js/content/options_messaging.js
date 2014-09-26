@@ -18,8 +18,8 @@ getOptions([
 		//console.log(options);
 		if(options.CurUser != "" && options.Signature != "")
 			addSigature(options.Signature);
-		if(options.CurUser != "" && options.Backup)
-			backupPost();
+		if(options.CurUser != "" && options.Backup != "")
+			backupPost(options.Backup);
 		//other options
 	}
 );

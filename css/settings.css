@@ -18,6 +18,10 @@ body{
 .i-addon{
 	margin-bottom: 20px;
 }
+
+#i-backup-box{
+	margin-bottom: 20px;
+}
 .i-checkbox{
 	height: 25px;
 	width: 50%;

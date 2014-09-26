@@ -87,16 +87,15 @@
         <h3 class="panel-title">高级设置</h3>
       </div>
       <div class="panel-body">
-        <div class="row i-checkbox" style="width: 75%;">
-          <div class="col-md-6 i-checkbox-name">帖子备份支持</div>
-          <div class="col-md-2">
-            <input type="checkbox" name="my-checkbox" id="i-backup-post">
-          </div>
-          <div class="col-md-4"><a href="backup.html" target="_blank">
-            <button type="button" class="btn btn-success" id="i-check-backup">
-              查看备份的帖子
-            </button></a>
-          </div>
+        <div class="input-group" id="i-backup-box">
+          <span class="input-group-addon">帖子备份</span>
+          <input type="text" class="form-control" id="i-backup-post" placeholder=
+          "请输入自定义密钥（支持中文），加解密都于浏览器进行，故请务必牢记！！！">
+          <span class="input-group-btn">
+            <a href="backup.html" target="_blank">
+              <button class="btn btn-default i-check-backup" type="button">查看已备份帖子</button>
+            </a>
+          </span>
         </div>
         <div class="row i-checkbox">
           <div class="col-md-9 i-checkbox-name">Markdown支持</div>

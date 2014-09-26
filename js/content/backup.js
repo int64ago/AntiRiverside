@@ -5,7 +5,7 @@ jQuery.fn.nl2br = function(){
      jQuery(this).val().replace(/(<br>)|(<br \/>)|(<p>)|(<\/p>)/g, "\n");
    });
 };
-function backupPost(){
+function backupPost(aesPasswd){
 	var authorId = null;
 	$("#postlist > div[class!='pl']").each(function(){
 		$(this).find(".pi strong").before("<strong><a id='post-backup' href='javascript:void(0);'>备份帖子</a></strong>");
@@ -31,19 +31,20 @@ function backupPost(){
 			BackupInfo.postUrl = curUrl;//.clone().find("quote").remove().end()
 			BackupInfo.postText = plc.find(".pct .t_f").clone().find(".quote").remove().end().text();
 			BackupInfo.postCode = ""; // empty if timeout
-			(function(callback){
-				var editp = plc.find(".editp");
-				if(editp.length != 0){
-					$.get(editp.attr("href"),function(data, status){
-						var code = data.match(/<textarea name="message"[\s\S]*?>([\s\S]*?)<\/textarea>/);
-						BackupInfo.postCode = code.length != 2? "":code[1];
-					});
-				}
-				callback(BackupInfo);
-			}(doBackup));
+
+			var editp = plc.find(".editp");
+			if(editp.length != 0){
+				$.get(editp.attr("href"),function(data, status){
+					var code = data.match(/<textarea name="message"[\s\S]*?>([\s\S]*?)<\/textarea>/);
+					BackupInfo.postCode = code.length != 2? "":code[1];
+					//escape stringify eating []
+					BackupInfo.postCode = BackupInfo.postCode.replace(/\[/g, "<-<");
+					BackupInfo.postCode = BackupInfo.postCode.replace(/]/g, ">->");
+					doBackup(BackupInfo);
+				});
+			}
 
 			function doBackup(info){
-				//console.log(info);
 				var url = "http://riverside.sinaapp.com/up?uid=" + curUser;
 				var xhr = new XMLHttpRequest();
 				xhr.open("POST", url, true);
@@ -60,7 +61,8 @@ function backupPost(){
 						}
 					}
 				});
-				xhr.send(JSON.stringify(info));
+				var encrypted = CryptoJS.AES.encrypt(JSON.stringify(info), aesPasswd);
+				xhr.send(encrypted);
 			}
 		});
 	});

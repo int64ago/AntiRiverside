@@ -24,7 +24,8 @@
 			"js/content/options_messaging.js",
 			"js/content/filter.js",
 			"js/content/add_signature.js",
-			"js/content/backup.js"
+			"js/content/backup.js",
+			"js/aes.js"
 		],
 		"matches": [ "http://bbs.stuhome.net/*" ]
 	}

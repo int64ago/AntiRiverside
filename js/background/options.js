@@ -188,7 +188,7 @@ var Options =
 		Advance: {
 			Backup: {
 				key: "Advance.Backup",
-				value: true
+				value: ""
 			},
 			Markdown: {
 				key: "Advance.Markdown",
