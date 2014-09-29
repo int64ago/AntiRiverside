@@ -1,11 +1,11 @@
 
 
-function updatePopupTitle(){
-	XHR.SendRequest("/home.php?mod=space&do=profile", function(xhr){
-		var ip = xhr.responseText.match(/上次访问 IP<\/em>(\d+\.\d+\.\d+\.\d+):\d+/);
+function updateIP(){
+	var url = "http://" + Options.Domain + "/home.php?mod=space&do=profile";
+	$.get(url, function(data, status){
+		var ip = data.match(/上次访问 IP<\/em>(\d+\.\d+\.\d+\.\d+):\d+/);
 		chrome.browserAction.setTitle({title: ip[1]});
 	});
 }
 
-//FIXME can't show ip if not online at first time
-window.setTimeout(updatePopupTitle(), 5 * 1000);
+window.setInterval(updateIP(), 25 * 1000);

@@ -1,46 +1,43 @@
 
 // Refer: https://code.google.com/p/riverside-plus/
 
-//for updating popup.html
+//For updating popup title
 var iMsgBoxNum = "0";
 var iNoticeBoxNum = "0";
 
-function UpdateBrowserAction(state, badge)
-{
-	badge = Options.Properties.Basic.ShowMsg.value ? badge: "";
+function UpdateBrowserAction(state, badge){
+	badge = Options.Properties.ShowMsg ? badge: "";
 	chrome.browserAction.setBadgeText({text: badge || ""});
 	state && chrome.browserAction.setIcon({path: state == "online" ? 
 		"images/icon19.png" : "images/grey.png"});
 }
 
-function UpdateMessageCount()
-{
-	XHR.SendRequest("/home.php?mod=space&do=pm", function(xhr){
-		var user = xhr.responseText.match(/avatar\.php\?uid=(\d+)/);
-		var notice = xhr.responseText.match(/提醒\((\d+)\)/);
-		var pm = xhr.responseText.match(/<strong class="xi1">\((\d+)\)<\/strong>/);
-		console.log("user:" + user);
-		console.log("notice:" + notice);
-		console.log("pm:" + pm);
-		Options.CurUser = user? user[1]:"";
+function UpdateMessageCount(){
+	var url = "http://" + Options.Properties.Domain + "/home.php?mod=space&do=pm";
+	$.get(url, function(data, status){
+		var user = data.match(/avatar\.php\?uid=(\d+)/);
+		var notice = data.match(/提醒\((\d+)\)/);
+		var pm = data.match(/<strong class="xi1">\((\d+)\)<\/strong>/);
+		console.log("user:" + user + " notice:" + notice + " pm:" + pm);
+		Options.Properties.CurUser = user? user[1]:"";
 		iMsgBoxNum = pm? pm[1]:"0";
 		iNoticeBoxNum = notice? notice[1]:"0";
 		if(notice || pm)
 		{
 			var num = (notice?parseInt(notice[1]):0) + (pm?parseInt(pm[1]):0);
 			UpdateBrowserAction("online", num.toString());
-			Options.Properties.Basic.ShowDeskMsg.value && 
-				ShowMessageNotification(num.toString());
+			Options.Properties.ShowDeskMsg && ShowMessageNotification(num.toString());
 		}else if(user){
 			UpdateBrowserAction("online");
-		}else
+		}else{
 			UpdateBrowserAction("offline", "?");
-	}, function(){
+		}
+	}).fail(function(){
 		UpdateBrowserAction("network-error", "×");
 	});
 }
 
-//TODO notify as a list
+//TODO Notify as a list
 function ShowMessageNotification(extra){
 	var options = {
 		type : "basic",
@@ -82,7 +79,7 @@ chrome.notifications.onClicked.addListener(function(id){
 	}
 });
 
-//TODO timeInterval can be set by user
-var timeInterval = 1000 * 10;
-UpdateMessageCount(); // update at beginning
-window.setInterval(UpdateMessageCount, timeInterval);
+// Update at beginning
+UpdateMessageCount();
+
+window.setInterval(UpdateMessageCount, 1000 * 10);

@@ -11,13 +11,16 @@ function backupPost(aesPasswd){
 		$(this).find(".pi strong").before("<strong><a id='post-backup' href='javascript:void(0);'>备份帖子</a></strong>");
 		var pls = $(this).find(".pls"); // author info
 		var plc = $(this).find(".plc"); // post info
-		authorId = authorId == null? $(this).attr("id") : authorId;
+
+		authorId == null? $(this).attr("id") : authorId;
 		var curId = $(this).attr("id");
+
 		var curUrl = (function(_this){
 			var locHref = location.href;
 			var lastPos = locHref.indexOf("#") == -1 ? locHref.length:locHref.indexOf("#");
 			return locHref.substring(0, lastPos) + "#" + _this.attr("id");
 		}($(this)));
+
 		$(this).find("#post-backup").on("click", function(){
 			var BackupInfo = {};
 			BackupInfo.backupTime = (function(){
@@ -28,23 +31,27 @@ function backupPost(aesPasswd){
 			BackupInfo.subject = (curId == authorId? "" : "[Re]") + $("#thread_subject").text();
 			BackupInfo.author = pls.find(".authi .xw1").text();
 			BackupInfo.postTime = plc.find(".authi em span").attr("title");
-			BackupInfo.postUrl = curUrl;//.clone().find("quote").remove().end()
+			BackupInfo.postUrl = curUrl;
+			// Get post text without quote
 			BackupInfo.postText = plc.find(".pct .t_f").clone().find(".quote").remove().end().text();
-			BackupInfo.postCode = ""; // empty if timeout
+			// For the problem of JSON.stringify, we replace [ ] with <-< >-> in code-text
+			BackupInfo.postCode = "";
 			var editp = plc.find(".editp");
 			if(editp.length != 0){
 				$.get(editp.attr("href"),function(data, status){
 					var code = data.match(/<textarea name="message"[\s\S]*?>([\s\S]*?)<\/textarea>/);
 					BackupInfo.postCode = code.length != 2? "":code[1];
-					//escape stringify eating []
 					BackupInfo.postCode = BackupInfo.postCode.replace(/\[/g, "<-<");
 					BackupInfo.postCode = BackupInfo.postCode.replace(/]/g, ">->");
-
+					doBackup(BackupInfo);
 				});
+			}else{
+				doBackup(BackupInfo);
 			}
-			doBackup(BackupInfo);
+
 			function doBackup(info){
-				var url = "http://riverside.sinaapp.com/up?uid=" + curUser;
+				var url = "http://riverside.sinaapp.com/up?uid=" + ContOptions.CurUser;
+				console.log(url);
 				var xhr = new XMLHttpRequest();
 				xhr.open("POST", url, true);
 				xhr.onreadystatechange = (function(){

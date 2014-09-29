@@ -6,20 +6,19 @@ $(function(){
 	var Options = bg.Options;
 
 	var Update = {
-		//"id of element":"key of storage"
 		SwitchPairs: {
-			"#i-show-msg": "Basic.ShowMsg",
-			"#i-desktop-msg": "Basic.ShowDeskMsg",
-			"#i-enable-markdown": "Advance.Markdown"
+			"#i-show-msg": "ShowMsg",
+			"#i-desktop-msg": "ShowDeskMsg",
+			"#i-enable-markdown": "Markdown"
 		},
 		StringPairs: {
-			"#i-reply-sig": "Basic.Signature",
-			"#i-backup-post": "Advance.Backup"
+			"#i-reply-sig": "Signature",
+			"#i-backup-post": "Backup"
 		},
 		ListPairs: {
-			"#i-list-filter-post": "Filter.PostsByUsers",
-			"#i-list-filter-sig": "Filter.SignaturesOfUsers",
-			"#i-list-focus-user": "Filter.UsersFocused"
+			"#i-list-filter-post": "PostsByUsers",
+			"#i-list-filter-sig": "SignaturesOfUsers",
+			"#i-list-focus-user": "UsersFocused"
 		},
 
 		_switch: function(id, value){
@@ -92,7 +91,6 @@ $(function(){
 				}
 			});
 
-			//del
 			$(id).find(".i-remove").click(function(){
 				$(this).parent().remove();
 				var value = Options.get(Update.ListPairs[id]);
@@ -119,7 +117,7 @@ $(function(){
 		}
 	};
 
-	(function(){ //init
+	(function(){
 		$("[name='my-checkbox']").bootstrapSwitch(); //init switches
 		Update.allSwitches();
 		Update.allStrings();

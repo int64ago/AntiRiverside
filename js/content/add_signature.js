@@ -1,19 +1,22 @@
 
 
-
-//TODO code looks ugly, reconstruct later
 function addSigature(privateSig){
-
+	// To let signature stay the bottom, marginTop is a must but not best...
 	var marginTop = "\n\n\n\n\n\n\n\n\n\n\n\n";
 	var commonSig = "[i][size=1][color=#c0c0c0]------------------------------------------ Signature By Anti Riverside ----------------------------------------------[/color][/size][/i]";
 	var signature = marginTop + commonSig + '\n' + privateSig;
 
+	// Add a none display area for signature,
+	// for we need to get the value during posting
 	$("#fastpostmessage").before("<span id='i-signature' style='display:none;'>" + signature + "</span>");
 
+	// This's a inline-script to modify the javascript function in content,
+	// then it can add the signature when posting by ctrl+enter
 	var script = document.createElement('script');
 	script.src = chrome.runtime.getURL('js/patch_keydown.js');
 	document.body.appendChild(script);
 
+	// Add a button beside the default quick-reply button
 	$("#postlist > div[class!='pl']").each(function(){
 		$(this).find(".fastre").before("<a class='sigfastre' href='javascript:void(0);'>带签名回复</a>");
 	});
@@ -32,13 +35,15 @@ function addSigature(privateSig){
 					}
 					$(".plc .quote").remove();
 					$(".plc #fastpostreturn").before(quoteText);
-					window.scrollTo('0', '999999');
+					window.scrollTo('0', '999999'); // Scroll to the end
 					$('#fastpostmessage').focus();
 				});
 		});
 	};
 	bindSigReply();
-	//FIXME add sigfastre twice ??!
+
+	// FIXME add sigfastre twice ??!
+	// Rebind when having new posts
 	$(document).on('DOMNodeInserted', function(e) {
 		if(e.target.id.indexOf("post_") != -1){
 			$(e.target).find(".fastre").before("<a class='sigfastre' href='javascript:void(0);'>带签名回复</a>");
