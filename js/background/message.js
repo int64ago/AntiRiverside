@@ -76,6 +76,10 @@ chrome.notifications.onClicked.addListener(function(id){
 		chrome.tabs.create({
 			url: Options.Properties.Root + "home.php?mod=space&do=pm"
 		});
+	}else if(id == "backup"){
+		chrome.tabs.create({
+			url: chrome.extension.getURL("backup.html")
+		});		
 	}
 });
 

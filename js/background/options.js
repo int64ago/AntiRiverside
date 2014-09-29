@@ -1,4 +1,6 @@
 
+// Refer: https://code.google.com/p/riverside-plus/
+
 var Storage = {
 	getBoolean: function(key, defaultValue){
 		var value = localStorage.getItem(key);
