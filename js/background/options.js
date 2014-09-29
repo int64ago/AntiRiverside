@@ -82,7 +82,7 @@ var Options =
 		// Advance
 		Backup: "", Markdown: false,
 		// Others
-		CurUser: "", Domain: "bbs.stuhome.net"
+		CurUser: "", Root: "http://bbs.stuhome.net/"
 	}
 };
 

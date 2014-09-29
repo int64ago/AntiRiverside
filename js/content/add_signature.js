@@ -42,7 +42,6 @@ function addSigature(privateSig){
 	};
 	bindSigReply();
 
-	// FIXME add sigfastre twice ??!
 	// Rebind when having new posts
 	$(document).on('DOMNodeInserted', function(e) {
 		if(e.target.id.indexOf("post_") != -1){

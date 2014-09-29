@@ -13,7 +13,7 @@ function UpdateBrowserAction(state, badge){
 }
 
 function UpdateMessageCount(){
-	var url = "http://" + Options.Properties.Domain + "/home.php?mod=space&do=pm";
+	var url = Options.Properties.Root + "home.php?mod=space&do=pm";
 	$.get(url, function(data, status){
 		var user = data.match(/avatar\.php\?uid=(\d+)/);
 		var notice = data.match(/提醒\((\d+)\)/);
@@ -74,7 +74,7 @@ chrome.notifications.onClicked.addListener(function(id){
 	});
 	if(id == "water"){
 		chrome.tabs.create({
-			url: 'http://bbs.stuhome.net/home.php?mod=space&do=pm'
+			url: Options.Properties.Root + "home.php?mod=space&do=pm"
 		});
 	}
 });
