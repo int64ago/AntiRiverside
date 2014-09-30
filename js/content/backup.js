@@ -11,10 +11,8 @@ function backupPost(aesPasswd){
 		$(this).find(".pi strong").before("<strong><a id='post-backup' href='javascript:void(0);'>备份帖子</a></strong>");
 		var pls = $(this).find(".pls"); // author info
 		var plc = $(this).find(".plc"); // post info
-
-		authorId == null? $(this).attr("id") : authorId;
+		authorId = authorId == null? $(this).attr("id") : authorId;
 		var curId = $(this).attr("id");
-
 		var curUrl = (function(_this){
 			var locHref = location.href;
 			var lastPos = locHref.indexOf("#") == -1 ? locHref.length:locHref.indexOf("#");
