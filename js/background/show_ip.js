@@ -5,7 +5,9 @@ function updateIP(){
 	$.get(url, function(data, status){
 		var ip = data.match(/上次访问 IP<\/em>(\d+\.\d+\.\d+\.\d+):\d+/);
 		chrome.browserAction.setTitle({title: ip[1]});
+		console.log('Update IP:' + ip[1]);
 	});
 }
 
-window.setInterval(updateIP(), 55 * 1000);
+updateIP();
+window.setInterval(updateIP, 55 * 1000);

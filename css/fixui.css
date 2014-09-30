@@ -182,8 +182,14 @@ PRE { font-family:monospace, Microsoft Yahei; }
 #adbar{
 	display: none;
 }
-
+#post-backup{
+	border-color: #417CAA;
+}
 .sigfastre {
 	background: url(../../template/qshpan/image/fastreply.gif) no-repeat 0 50%;
 	font-style: normal;
+}
+
+#i-reply-sig{
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", "WenQuanYi Zen Hei", sans-serif;
 }

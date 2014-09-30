@@ -5,6 +5,22 @@
 var iMsgBoxNum = "0";
 var iNoticeBoxNum = "0";
 
+var iMessagesBox = new Array();
+var iNoticesBox = new Array();
+
+function getMessages(){
+	iMessagesBox = [];
+	var url = Options.Properties.Root + "home.php?mod=space&do=pm&filter=newpm";
+	$.get(url, function(data, status){
+		var messages = data.match(/(\d+)" target="_blank" class="xw1">([\s\S]+?)<\/a>/g);
+		for(var msg in messages){
+			var detail = messages[msg].match(/(\d+)" target="_blank" class="xw1">([\s\S]+?)<\/a>/i);
+			iMessagesBox[detail[1]] = detail[2];
+		}
+		console.log(iMessagesBox);
+	});
+}
+
 function UpdateBrowserAction(state, badge){
 	badge = Options.Properties.ShowMsg ? badge: "";
 	chrome.browserAction.setBadgeText({text: badge || ""});
@@ -13,6 +29,7 @@ function UpdateBrowserAction(state, badge){
 }
 
 function UpdateMessageCount(){
+	getMessages();
 	var url = Options.Properties.Root + "home.php?mod=space&do=pm";
 	$.get(url, function(data, status){
 		var user = data.match(/avatar\.php\?uid=(\d+)/);

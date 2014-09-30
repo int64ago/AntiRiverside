@@ -72,7 +72,6 @@ $(function(){
 			});
 		},
 		_list: function(id){
-			//add
 			var _button = $(id).parent().find(".i-add");
 			var _input = $(id).parent().find("input");
 			_button.click(function(){
