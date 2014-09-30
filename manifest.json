@@ -27,7 +27,7 @@
 			"js/content/worker.js",
 			"js/aes.js"
 		],
-		"matches": [ "http://bbs.stuhome.net/*" ]
+		"matches": [ "http://bbs.stuhome.net/forum.php*" ]
 	}
 	],
 	"options_page": "options.html",
