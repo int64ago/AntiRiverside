@@ -10,3 +10,17 @@ function filterSignature(blackList){
 		}
 	});
 }
+
+// For some reasons, we don't block posts in homepage
+function filterPosts(blackList){
+	// In post
+	$("#postlist > div[class!='pl']").each(function(){
+		if($.inArray($(this).find(".xw1:first").text(), blackList) != -1)
+			$(this).remove();
+	});
+	// In post list
+	$("#threadlisttableid > tbody").each(function(){
+		if($.inArray($(this).find("cite a:first").text(), blackList) != -1)
+			$(this).remove();
+	});
+}

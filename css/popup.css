@@ -1,14 +1,15 @@
 html{
 	height: 70px;
-	width: 130px;
+	width: 300px;
 }
 body{
 	background-color: #F0F8FF;
 	height: 70px;
-	width: 130px;
+	width: 300px;
 }
-.container{
-	
+
+.i-focus{
+	font-size: 12px;
 }
 
 .i-remove{

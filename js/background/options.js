@@ -84,7 +84,7 @@ var Options =
 		// Advance
 		Backup: "", Markdown: false,
 		// Others
-		CurUser: "", Root: "http://bbs.stuhome.net/"
+		CurUser: "", Root: "http://bbs.stuhome.net/", TidList: []
 	}
 };
 
@@ -92,10 +92,14 @@ Options.init();
 
 chrome.extension.onMessage.addListener(
 	function(message, sender, sendResponse){
-		if(message.name && message.name == "getOptions")
+		if(message.name && message.name == "getOptions"){
 			sendResponse(Options.Properties);
-		else if(message.name && message.name == "backupInfo"){
+		}else if(message.name && message.name == "backupInfo"){
 			ShowBackupNotification(message.optionNames);
+		}else if(message.name && message.name == "addTidList"){
+			var list = Options.get("TidList");
+			list.push(message.optionNames);
+			Options.set("TidList", list);
 		}
 	}
 );

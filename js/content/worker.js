@@ -17,5 +17,6 @@ function contentWorker(){
 		ContOptions.Signature == "" || addSigature(ContOptions.Signature);
 		ContOptions.Backup == "" || backupPost(ContOptions.Backup);
 		filterSignature(ContOptions.SignaturesOfUsers);
+		filterPosts(ContOptions.PostsByUsers);
 	}
 }

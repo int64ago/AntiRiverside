@@ -4,9 +4,8 @@
 //For updating popup title
 var iMsgBoxNum = "0";
 var iNoticeBoxNum = "0";
-
+var iFocusPostBox = new Array();
 var iMessagesBox = new Array();
-var iNoticesBox = new Array();
 
 function getMessages(){
 	iMessagesBox = [];
@@ -17,8 +16,45 @@ function getMessages(){
 			var detail = messages[msg].match(/(\d+)" target="_blank" class="xw1">([\s\S]+?)<\/a>/i);
 			iMessagesBox[detail[1]] = detail[2];
 		}
-		console.log(iMessagesBox);
 	});
+}
+
+function getFocusPosts(){
+	var patt = /(<div id="framebZWlst_center"[\s\S]+<\/div>)<div id="framebZWlst_right"/;
+	iFocusPostBox = [];
+	$.get(Options.Properties.Root, function(data, status){
+		var divObj = data.match(patt)[1];
+		var tidList = new Array();
+		var newList = new Array();
+		var oldList = Options.get("TidList");
+		$(divObj).find("li").each(function(){
+			var tid = $(this).find(">a").attr("href").match(/tid=(\d+)/)[1];
+			tidList.push(tid);
+			var author = $(this).find("em a").text();
+			// If the author of tid from homepage is not included
+			// in TidList, we add it(author&tid&title) into iFocusPostBox
+			// for showing later
+			if($.inArray(author, Options.Properties.UsersFocused) != -1){
+				if($.inArray(tid, oldList) == -1){
+					var title = $(this).find(">a").attr("title");
+					iFocusPostBox.push({
+						"tid": tid,
+						"author": author,
+						"text": title
+					});
+				}
+
+			}
+		});
+		// If tid in TidList not in tidList from homepage,
+		// remove it from the TidList
+		for(var tid_i in oldList){
+			if($.inArray(oldList[tid_i], tidList) != -1)
+				newList.push(oldList[tid_i]);
+		}
+		Options.set("TidList", newList);
+	});
+
 }
 
 function UpdateBrowserAction(state, badge){
@@ -39,9 +75,9 @@ function UpdateMessageCount(){
 		Options.Properties.CurUser = user? user[1]:"";
 		iMsgBoxNum = pm? pm[1]:"0";
 		iNoticeBoxNum = notice? notice[1]:"0";
-		if(notice || pm)
+		if(notice || pm || iFocusPostBox.length != 0)
 		{
-			var num = (notice?parseInt(notice[1]):0) + (pm?parseInt(pm[1]):0);
+			var num = (notice?parseInt(notice[1]):0) + (pm?parseInt(pm[1]):0) + iFocusPostBox.length;
 			UpdateBrowserAction("online", num.toString());
 			Options.Properties.ShowDeskMsg && ShowMessageNotification(num.toString());
 		}else if(user){
@@ -102,5 +138,7 @@ chrome.notifications.onClicked.addListener(function(id){
 
 // Update at beginning
 UpdateMessageCount();
+getFocusPosts();
 
-window.setInterval(UpdateMessageCount, 1000 * 10);
+window.setInterval(UpdateMessageCount, 10 * 1000);
+window.setInterval(getFocusPosts, 15 * 1000);
