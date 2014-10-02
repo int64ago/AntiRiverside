@@ -82,7 +82,7 @@ var Options =
 		// Filter
 		PostsByUsers: [], SignaturesOfUsers: [], UsersFocused: [],
 		// Advance
-		Backup: "", Markdown: false,
+		Backup: "",
 		// Others
 		CurUser: "", Root: "http://bbs.stuhome.net/", TidList: []
 	}

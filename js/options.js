@@ -8,8 +8,7 @@ $(function(){
 	var Update = {
 		SwitchPairs: {
 			"#i-show-msg": "ShowMsg",
-			"#i-desktop-msg": "ShowDeskMsg",
-			"#i-enable-markdown": "Markdown"
+			"#i-desktop-msg": "ShowDeskMsg"
 		},
 		StringPairs: {
 			"#i-reply-sig": "Signature",
