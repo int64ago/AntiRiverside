@@ -1,7 +1,7 @@
 
 var bg = chrome.extension.getBackgroundPage();
 $(function(){
-	if(bg.iMsgBoxNum == "0" && bg.iNoticeBoxNum == "0" && bg.iFocusPostNum == 0){
+	if(bg.iMsgBoxNum == "0" && bg.iNoticeBoxNum == "0" && bg.iFocusPostBox.length == 0){
 		chrome.tabs.create({
 			url: bg.Options.Properties.Root
 		});

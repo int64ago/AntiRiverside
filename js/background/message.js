@@ -126,9 +126,10 @@ chrome.notifications.onClicked.addListener(function(id){
 		//console.log("is cleared? "+ wasCleared);
 	});
 	if(id == "water"){
-		chrome.tabs.create({
-			url: Options.Properties.Root + "home.php?mod=space&do=pm"
-		});
+		chrome.notifications.clear("water", function(wasCleared){});
+		//chrome.tabs.create({
+		//	url: Options.Properties.Root + "home.php?mod=space&do=pm"
+		//});
 	}else if(id == "backup"){
 		chrome.tabs.create({
 			url: chrome.extension.getURL("backup.html")
