@@ -115,6 +115,7 @@ $(function(){
 		}
 	};
 
+
 	(function(){
 		$("[name='my-checkbox']").bootstrapSwitch(); //init switches
 		Update.allSwitches();
@@ -123,5 +124,71 @@ $(function(){
 		OnChange.allSwitches();
 		OnChange.allStrings();
 		OnChange.allLists();
+		$("#i-to-cloud").on("click", function(){
+			if(Options.Properties.CurUser == ""){
+				alert("无法同步！可能是【未登录】");
+				return;
+			}
+			var aesPasswd = Options.get("Backup");
+			if(aesPasswd == ""){
+				alert("无法同步！可能是【未设置密钥】");
+				return;
+			}
+			var localSettings = {};
+			localSettings.ShowMsg = Options.get("ShowMsg");
+			localSettings.ShowDeskMsg = Options.get("ShowDeskMsg");
+			localSettings.Signature = Options.get("Signature");
+			localSettings.PostsByUsers = Options.get("PostsByUsers");
+			localSettings.SignaturesOfUsers = Options.get("SignaturesOfUsers");
+			localSettings.UsersFocused = Options.get("UsersFocused");
+			var url = "http://riverside.sinaapp.com/tosetting?uid=" + Options.Properties.CurUser;
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", url, true);
+			xhr.onreadystatechange = (function(){
+				if(this.readyState == XMLHttpRequest.DONE && this.status == 200){
+					console.log(this.responseText);
+				}
+			});
+			var encrypted = CryptoJS.AES.encrypt(JSON.stringify(localSettings), aesPasswd);
+			xhr.send(encrypted);
+		});
+		$("#i-from-cloud").on("click", function(){
+			if(Options.Properties.CurUser == ""){
+				alert("无法同步！可能是【未登录】");
+				return;
+			}
+			var aesPasswd = Options.get("Backup");
+			if(aesPasswd == ""){
+				alert("无法同步！可能是【未设置密钥】");
+				return;
+			}
+			var settingUrl = "http://riverside.sinaapp.com/fromsetting?uid=" + Options.Properties.CurUser;
+			$.get(settingUrl, function(_data, _status){
+				if(_data == "nosetting"){
+					alert("无法同步！可能是【从未上传过配置】");
+				}else{
+					var dataUrl = "http://riverside.qiniudn.com/" + _data;
+					$.get(dataUrl, function(data, status){
+						try{
+							data = CryptoJS.AES.decrypt(data, aesPasswd).toString(CryptoJS.enc.Utf8);
+							var cloudSettings = JSON.parse(data);
+						}catch(e){
+							console.log(e.name + ":" + e.message);
+							alert("无法同步！可能是【密钥错误】");
+							return;
+						}
+						Options.set("ShowMsg", cloudSettings.ShowMsg);
+						Options.set("ShowDeskMsg", cloudSettings.ShowDeskMsg);
+						Options.set("Signature", cloudSettings.Signature);
+						Options.set("PostsByUsers", cloudSettings.PostsByUsers);
+						Options.set("SignaturesOfUsers", cloudSettings.SignaturesOfUsers);
+						Options.set("UsersFocused", cloudSettings.UsersFocused);
+						location.reload();
+					}).fail(function(){
+						alert("无法同步！可能是【服务器错误】");
+					});
+				}
+			});
+		});
 	})();
 });
