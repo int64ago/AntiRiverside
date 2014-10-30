@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2,
 	"name": "Anti Riverside",
-	"description": "Extension for bbs.stuhome.net",
-	"version": "1.5",
+	"description": "Extension for bbs.uestc.edu.cn",
+	"version": "1.5.1",
 	"icons": {
 		"128": "images/icon128.png",
 		"64": "images/icon64.png",
@@ -15,7 +15,7 @@
 	{
 		"all_frames": true,
 		"css": [ "css/fixui.css" ],
-      	"matches": [ "http://bbs.stuhome.net/*" ]
+      	"matches": [ "http://bbs.uestc.edu.cn/*" ]
 	},
 	{
 		"run_at": "document_end",
@@ -27,7 +27,7 @@
 			"js/content/worker.js",
 			"js/aes.js"
 		],
-		"matches": [ "http://bbs.stuhome.net/forum.php*" ]
+		"matches": [ "http://bbs.uestc.edu.cn/forum.php*" ]
 	}
 	],
 	"options_page": "options.html",
@@ -35,7 +35,7 @@
 	    "notifications",
       	"tabs",
 		"storage",
-		"http://bbs.stuhome.net/*",
+		"http://bbs.uestc.edu.cn/*",
 		"http://riverside.sinaapp.com/*",
 		"http://riverside.qiniudn.com/*"
 	],

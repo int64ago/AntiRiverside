@@ -1,7 +1,7 @@
 AntiRiverside
 =========
 
-This's a Chrome extension of http://bbs.stuhome.net/ for better experience && functions enhancing.
+This's a Chrome extension of http://bbs.uestc.edu.cn/ for better experience && functions enhancing.
 
 I think it's amost finished, no features will be published recently, but bugs will be fixed timely.
 

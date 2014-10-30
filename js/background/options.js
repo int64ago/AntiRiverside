@@ -84,7 +84,7 @@ var Options =
 		// Advance
 		Backup: "",
 		// Others
-		CurUser: "", Root: "http://bbs.stuhome.net/", TidList: []
+		CurUser: "", Root: "http://bbs.uestc.edu.cn/", TidList: []
 	}
 };
 
