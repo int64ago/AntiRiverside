@@ -2,7 +2,7 @@
 
 function addSigature(privateSig){
 	// To let signature stay the bottom, marginTop is a must but not best...
-	var marginTopLen = 5 + (privateSig.split('\n').length < 8?(8-privateSig.split('\n').length):0);
+	var marginTopLen = 9 + (privateSig.split('\n').length < 6?(6-privateSig.split('\n').length):0);
 	var marginTop = Array(marginTopLen).join("\n");
 	var commonSig = "[i][size=1][color=#c0c0c0]------------------------------------------ Signature By Anti Riverside ----------------------------------------------[/color][/size][/i]";
 	var signature = marginTop + commonSig + '\n' + privateSig;
