@@ -10,6 +10,9 @@
 @font-face { font-family: SimHei; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Hiragino Sans GB), local(Noto Sans); }
 @font-face { font-family: SimHei; unicode-range: U+0-2E7F; src: local(Segoe UI); }
 
+body{
+	font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Zen Hei", "Noto Sans", sans-serif;
+}
 
 #adbar{
 	display: none;
