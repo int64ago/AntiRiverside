@@ -1,6 +1,5 @@
 
 function htmltoubb(str){
-	str = str.replace(/<br[^>]*>/ig,'\n');
 	str = str.replace(/<p[^>\/]*\/>/ig,'\n');
 	str = str.replace(/\son[\w]{3,16}\s?=\s*([\'\"]).+?\1/ig,'');
 	str = str.replace(/<hr[^>]*>/ig,'[hr]');
@@ -24,7 +23,8 @@ function addSigature(privateSig){
 	// To let signature stay the bottom, marginTop is a must but not best...
 	var marginTopLen = 9 + (privateSig.split('\n').length < 6?(6-privateSig.split('\n').length):0);
 	var marginTop = Array(marginTopLen).join("\n");
-	var commonSig = "[i][size=1][color=#c0c0c0]------------------------------------------ Signature By Anti Riverside ----------------------------------------------[/color][/size][/i]";
+	var sigContent = '------------------------------------------ Signature By Anti Riverside ----------------------------------------------';
+	var commonSig = '[i][size=1][color=#c0c0c0]' + sigContent + '[/color][/size][/i]';
 	var signature = marginTop + commonSig + '\n' + privateSig;
 
 	// Add a none display area for signature,
@@ -49,6 +49,9 @@ function addSigature(privateSig){
 	$(".sofabackup").on("click", function(){2
 		var backupContent = '[size=1][color=#c0c0c0]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>BEGIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[/color][/size]\n';
 		backupContent += htmltoubb($(this).parents('tbody').find('.t_f').html());
+		if(backupContent.indexOf(sigContent) != -1){
+			backupContent = backupContent.substring(0, backupContent.indexOf(sigContent))
+		}
 		backupContent += '\n[size=1][color=#c0c0c0]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>END<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[/color][/size]';
 		console.log(backupContent);
 		fastpostmessage.value = backupContent;
