@@ -1,4 +1,24 @@
 
+function htmltoubb(str){
+	str = str.replace(/<br[^>]*>/ig,'\n');
+	str = str.replace(/<p[^>\/]*\/>/ig,'\n');
+	str = str.replace(/\son[\w]{3,16}\s?=\s*([\'\"]).+?\1/ig,'');
+	str = str.replace(/<hr[^>]*>/ig,'[hr]');
+	str = str.replace(/<(sub|sup|u|strike|b|i|pre)>/ig,'[$1]');
+	str = str.replace(/<\/(sub|sup|u|strike|b|i|pre)>/ig,'[/$1]');
+	str = str.replace(/<(\/)?strong>/ig,'[$1b]');
+	str = str.replace(/<(\/)?em>/ig,'[$1i]');
+	str = str.replace(/<(\/)?blockquote([^>]*)>/ig,'[$1quote]');
+	str = str.replace(/<img[^>]*smile=\"(\d+)\"[^>]*>/ig,'[s:$1]');
+	str = str.replace(/<img[^>]*src=[\'\"\s]*([^\s\'\"]+)[^>]*>/ig,'[img]'+'$1'+'[/img]');
+	str = str.replace(/<a[^>]*href=[\'\"\s]*([^\s\'\"]*)[^>]*>(.+?)<\/a>/ig,'[url=$1]'+'$2'+'[/url]');
+	str = str.replace(/<[^>]*?>/ig, '');
+	str = str.replace(/&amp;/ig, '&');
+	str = str.replace(/&lt;/ig, '<');
+	str = str.replace(/&gt;/ig, '>');
+	str = str.replace(/&nbsp;/ig, ' ');
+	return str;
+}
 
 function addSigature(privateSig){
 	// To let signature stay the bottom, marginTop is a must but not best...
@@ -20,6 +40,21 @@ function addSigature(privateSig){
 	// Add a button beside the default quick-reply button
 	$("#postlist > div[class!='pl']").each(function(){
 		$(this).find(".fastre").before("<a class='sigfastre' href='javascript:void(0);'>带签名回复</a>");
+	});
+
+	$("#postlist > div[class!='pl']").each(function(){
+		$(this).find(".fastre").before("<a class='sofabackup' href='javascript:void(0);'>沙发的责任</a>");
+	});
+
+	$(".sofabackup").on("click", function(){2
+		var backupContent = '[size=1][color=#c0c0c0]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>BEGIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[/color][/size]\n';
+		backupContent += htmltoubb($(this).parents('tbody').find('.t_f').html());
+		backupContent += '\n[size=1][color=#c0c0c0]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>END<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[/color][/size]';
+		console.log(backupContent);
+		fastpostmessage.value = backupContent;
+		fastpostsubmit.click();
+		alert('天呐！你真棒！!');
+		window.scrollTo('0', '999999');
 	});
 
 	var bindSigReply = function(){

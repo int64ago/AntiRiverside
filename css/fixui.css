@@ -25,6 +25,11 @@ body{
 	font-style: normal;
 }
 
+.sofabackup {
+	background: url(../../template/qshpan/image/fastreply.gif) no-repeat 0 50%;
+	font-style: normal;
+}
+
 #i-reply-sig{
 	font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Zen Hei", "Noto Sans", sans-serif;
 }
