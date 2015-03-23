@@ -45,7 +45,10 @@ function addSigature(privateSig, hasSignature){
 		console.log(backupContent);
 		fastpostmessage.value = backupContent;
 		fastpostsubmit.click();
-		alert('天呐！你真棒！!');
+		chrome.extension.sendMessage({
+			name: "sofaBackupInfo",
+			optionNames: "天呐！你真棒！！"
+		});
 		window.scrollTo('0', '999999');
 	});
 

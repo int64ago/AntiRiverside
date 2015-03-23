@@ -121,6 +121,26 @@ function ShowBackupNotification(result){
 	});
 }
 
+function ShowSofaBackupNotification(result){
+	var options = {
+		type : "basic",
+		title : "沙发的责任",
+		message: result,
+		iconUrl : "images/icon48.png"
+	};
+	chrome.notifications.clear("sofabackup", function(wasCleared){
+		//console.log("is cleared? "+ wasCleared);
+	});
+	chrome.notifications.create("sofabackup", options, function(){
+		//console.log("notifications");
+	});
+	setTimeout(function(){
+		chrome.notifications.clear("sofabackup", function(wasCleared){
+			//console.log("is cleared? "+ wasCleared);
+		});
+	}, 5000);
+}
+
 chrome.notifications.onClicked.addListener(function(id){
 	chrome.notifications.clear(id, function(wasCleared){
 		//console.log("is cleared? "+ wasCleared);
@@ -134,6 +154,8 @@ chrome.notifications.onClicked.addListener(function(id){
 		chrome.tabs.create({
 			url: chrome.extension.getURL("backup.html")
 		});		
+	}else if(id == "sofabackup"){
+		chrome.notifications.clear("sofabackup", function(wasCleared){});
 	}
 });
 

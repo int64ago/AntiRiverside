@@ -100,6 +100,8 @@ chrome.extension.onMessage.addListener(
 			var list = Options.get("TidList");
 			list.push(message.optionNames);
 			Options.set("TidList", list);
+		}else if(message.name && message.name == "sofaBackupInfo"){
+			ShowSofaBackupNotification(message.optionNames);
 		}
 	}
 );
