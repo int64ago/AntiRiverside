@@ -37,10 +37,12 @@ function addSigature(privateSig, hasSignature){
 		var backupContent = '[size=1][color=#c0c0c0]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>BEGIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[/color][/size]\n';
 		backupContent += htmltoubb($(this).parents('tbody').find('.t_f').html());
 		if(backupContent.indexOf(sigContent) != -1){
-			backupContent = backupContent.substring(0, backupContent.indexOf(sigContent))
+			backupContent = backupContent.substring(0, backupContent.indexOf(sigContent) - '[i]'.length)
 		}
-		backupContent += '\n[size=1][color=#c0c0c0]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>END<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[/color][/size]';
-		backupContent += '\n[url=' + urlWithoutHash + '#' + postID + ']原帖[/url]'
+		backupContent = backupContent.replace(/(\s*$)/g, '');
+		backupContent += '\n\n[size=1][color=#c0c0c0]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>END<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[/color][/size]';
+		backupContent += '\n[url=' + urlWithoutHash + '#' + postID + ']原帖[/url]';
+		console.log(backupContent);
 		fastpostmessage.value = backupContent;
 		fastpostsubmit.click();
 		alert('天呐！你真棒！!');
