@@ -32,13 +32,15 @@ function addSigature(privateSig, hasSignature){
 	});
 
 	$(".sofabackup").on("click", function(){
+		var postID = $(this).parents('table').parent().attr('id');
+		var urlWithoutHash = window.location.origin + window.location.pathname + window.location.search;
 		var backupContent = '[size=1][color=#c0c0c0]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>BEGIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[/color][/size]\n';
 		backupContent += htmltoubb($(this).parents('tbody').find('.t_f').html());
 		if(backupContent.indexOf(sigContent) != -1){
 			backupContent = backupContent.substring(0, backupContent.indexOf(sigContent))
 		}
 		backupContent += '\n[size=1][color=#c0c0c0]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>END<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[/color][/size]';
-		console.log(backupContent);
+		backupContent += '\n[url=' + urlWithoutHash + '#' + postID + ']原帖[/url]'
 		fastpostmessage.value = backupContent;
 		fastpostsubmit.click();
 		alert('天呐！你真棒！!');
