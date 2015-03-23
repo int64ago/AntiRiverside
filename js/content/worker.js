@@ -14,7 +14,7 @@ chrome.extension.sendMessage({name: "getOptions"},
 
 function contentWorker(){
 	if(ContOptions.CurUser && ContOptions.CurUser != ""){
-		ContOptions.Signature == "" || addSigature(ContOptions.Signature);
+		addSigature(ContOptions.Signature, ContOptions.Signature != "");
 		ContOptions.Backup == "" || backupPost(ContOptions.Backup);
 		filterSignature(ContOptions.SignaturesOfUsers);
 		filterPosts(ContOptions.PostsByUsers);

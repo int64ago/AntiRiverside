@@ -19,7 +19,7 @@ function htmltoubb(str){
 	return str;
 }
 
-function addSigature(privateSig){
+function addSigature(privateSig, hasSignature){
 	// To let signature stay the bottom, marginTop is a must but not best...
 	var marginTopLen = 9 + (privateSig.split('\n').length < 6?(6-privateSig.split('\n').length):0);
 	var marginTop = Array(marginTopLen).join("\n");
@@ -27,6 +27,26 @@ function addSigature(privateSig){
 	var commonSig = '[i][size=1][color=#c0c0c0]' + sigContent + '[/color][/size][/i]';
 	var signature = marginTop + commonSig + '\n' + privateSig;
 
+	$("#postlist > div[class!='pl']").each(function(){
+		$(this).find(".fastre").after("<a class='sofabackup' href='javascript:void(0);'>沙发的责任</a>");
+	});
+
+	$(".sofabackup").on("click", function(){
+		var backupContent = '[size=1][color=#c0c0c0]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>BEGIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[/color][/size]\n';
+		backupContent += htmltoubb($(this).parents('tbody').find('.t_f').html());
+		if(backupContent.indexOf(sigContent) != -1){
+			backupContent = backupContent.substring(0, backupContent.indexOf(sigContent))
+		}
+		backupContent += '\n[size=1][color=#c0c0c0]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>END<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[/color][/size]';
+		console.log(backupContent);
+		fastpostmessage.value = backupContent;
+		fastpostsubmit.click();
+		alert('天呐！你真棒！!');
+		window.scrollTo('0', '999999');
+	});
+
+	if(!hasSignature)
+		return;
 	// Add a none display area for signature,
 	// for we need to get the value during posting
 	$("#fastpostmessage").before("<span id='i-signature' style='display:none;'>" + signature + "</span>");
@@ -40,24 +60,6 @@ function addSigature(privateSig){
 	// Add a button beside the default quick-reply button
 	$("#postlist > div[class!='pl']").each(function(){
 		$(this).find(".fastre").before("<a class='sigfastre' href='javascript:void(0);'>带签名回复</a>");
-	});
-
-	$("#postlist > div[class!='pl']").each(function(){
-		$(this).find(".fastre").before("<a class='sofabackup' href='javascript:void(0);'>沙发的责任</a>");
-	});
-
-	$(".sofabackup").on("click", function(){2
-		var backupContent = '[size=1][color=#c0c0c0]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>BEGIN<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[/color][/size]\n';
-		backupContent += htmltoubb($(this).parents('tbody').find('.t_f').html());
-		if(backupContent.indexOf(sigContent) != -1){
-			backupContent = backupContent.substring(0, backupContent.indexOf(sigContent))
-		}
-		backupContent += '\n[size=1][color=#c0c0c0]>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>END<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[/color][/size]';
-		console.log(backupContent);
-		fastpostmessage.value = backupContent;
-		fastpostsubmit.click();
-		alert('天呐！你真棒！!');
-		window.scrollTo('0', '999999');
 	});
 
 	var bindSigReply = function(){
