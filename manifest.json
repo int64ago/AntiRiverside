@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "Anti Riverside",
 	"description": "Extension for bbs.uestc.edu.cn",
-	"version": "2.1.0",
+	"version": "2.1.1",
 	"icons": {
 		"128": "images/icon128.png",
 		"64": "images/icon64.png",
