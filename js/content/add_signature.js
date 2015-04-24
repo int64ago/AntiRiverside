@@ -34,14 +34,13 @@ function addSigature(privateSig, hasSignature){
 	$(".sofabackup").on("click", function(){
 		var postID = $(this).parents('table').parent().attr('id');
 		var urlWithoutHash = window.location.origin + window.location.pathname + window.location.search;
-		var backupContent = '[color=#c0c0c0]<!--[/color]\n';
+		var backupContent = '\n[hr]';
 		backupContent += htmltoubb($(this).parents('tbody').find('.t_f').html());
 		if(backupContent.indexOf(sigContent) != -1){
 			backupContent = backupContent.substring(0, backupContent.indexOf(sigContent) - '[i]'.length)
 		}
 		backupContent = backupContent.replace(/(\s*$)/g, '');
-		backupContent += '\n\n[color=#c0c0c0]-->[/color]';
-		backupContent += '\n[url=' + urlWithoutHash + '#' + postID + ']原帖[/url]';
+		backupContent += '\n\n[hr]\n[url=' + urlWithoutHash + '#' + postID + ']原帖[/url]';
 		console.log(backupContent);
 		fastpostmessage.value = backupContent;
 		fastpostsubmit.click();
